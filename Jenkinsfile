@@ -32,7 +32,7 @@ pipeline{
         }
         stage("code deploy"){
          steps{
-             sh "docker stop clever_borg && docker rm clever_borg"
+             sh "docker stop node && docker rm node"
              sh "docker run -d -p 3000:3000 node-app:latest"
          }   
         }
