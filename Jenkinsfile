@@ -1,5 +1,5 @@
 pipeline{
-    agent { lable "test"};
+    agent { label "test"};
     stages{
         stage("code clone from github"){
             steps{
