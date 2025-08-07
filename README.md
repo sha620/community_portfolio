@@ -4,7 +4,7 @@ A modern, responsive portfolio website built with Next.js 14, React 18, and Tail
 
 ## Features
 
-- 🚀 Built with Next.js 14 and React 18
+- 🚀 Built with Next.js 14 and React 17
 - 💨 Tailwind CSS for styling
 - 🎭 Framer Motion animations
 - 📱 Fully responsive design
