@@ -32,7 +32,6 @@ pipeline {
         }
         stage('deploy'){
           steps{
-              sh "docker stop noda && docker rm noda"
               sh "docker run -d --name noda -p 3000:3000 noda-app:la"
           }  
         }
