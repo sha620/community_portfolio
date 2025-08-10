@@ -1,40 +1,40 @@
-pipeline{
+pipeline {
     agent any;
     stages{
-        stage("code clone from github"){
+        stage('code clone'){
             steps{
-                git url :"https://github.com/sha620/community_portfolio.git", branch:"main"
-            }
-            
-        }
-        stage("code build"){
-            steps{
-                sh "docker build -t node-app:latest ."
+                git url : "https://github.com/sha620/community_portfolio.git", branch:"main"
             }
         }
-        stage("code test"){
-            steps{
-                echo "king"
-            }
+        stage('code buil'){
+          steps{
+              sh "docker build -t noda-app:la ."
+          }  
         }
-        stage("code push to dockerhub"){
-            steps{
-                withCredentials([usernamePassword(
-                credentialsId:"Dockerhubcred",
-                passwordVariable:"dockerhubpass",
-                usernameVariable:"dockerhubuser"
-                )]){
-                sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}"
-                sh "docker image tag node-app:latest ${env.dockerhubuser}/node-app:latest"
-                sh "docker push ${env.dockerhubuser}/node-app:latest"
-                }
-            }
-        }
-        stage("code deploy"){
+        stage('code test'){
          steps{
-             sh "docker run -d -p 3000:3000 node-app:latest"
+             echo "test"
          }   
         }
+        stage('code push to doker'){
+            steps{
+               withCredentials([usernamePassword(
+               credentialsId: "key",
+               usernameVariable: "user",
+               passwordVariable: "pass"
+               )]){
+                   sh "docker login -u ${env.user} -p ${env.pass}"
+                   sh "docker image tag noda-app:la ${env.user}/noda-app:la "
+                   sh "docker push ${env.user}/noda-app:la"
+               }
+            }
+        
+        }
+        stage('deploy'){
+          steps{
+              sh "docker stop noda && docker rm noda"
+              sh "docker run -d --name noda -p 3000:3000 noda-app:la"
+          }  
+        }
     }
-    
 }
